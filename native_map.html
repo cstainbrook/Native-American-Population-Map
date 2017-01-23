@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+    <style>
+    h1{
+        text-align: center;
+        font-size: 300%
+    }
+    </style>
+    <script type="text/javascript">
+
+    function draw(geo_data) {
+
+        d3.select('body')
+            .append('h1')
+            .text('Native American Population');
+
+        var width = 1400,
+            height = 700;
+
+        var svg = d3.select('body')
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height)
+                    .append('g')
+                    .attr('class', 'map');
+
+        var projection = d3.geo.mercator()
+                               .scale(850)
+                               .translate([width * 1.55, height * 1.28]);
+
+        var path = d3.geo.path().projection(projection);
+
+        var map = svg.selectAll('path')
+            .data(geo_data.features)
+            .enter()
+            .append('path')
+            .attr('class', 'us_counties')
+            .attr('d', path)
+            .style('stroke-width', 0.5);
+
+        function update_colors(pop_data) {
+            debugger;
+            var population_extent = d3.extent(pop_data, function(d) {
+                debugger;
+                return d['population'];
+            })
+
+            var population_scale = d3.scale.linear().domain(population_extent).range([0,1])
+
+            debugger;
+
+            svg.selectAll("text")
+                .data(geo_data.features)
+                .enter()
+                .append('svg:text')
+                .text(function(d){
+                    return population_scale(pop_data[d.properties.GEOID])
+                })
+                .attr("x", function(d) {
+                    return path.centroid(d)[0];
+                })
+                .attr("y", function(d) {
+                    return path.centroid(d)[1];
+                })
+                .attr('text-anchor', 'middle')
+                .attr('fill', 'white')
+        };
+
+        function get_population(year) {
+            d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,B01001C_001E&for=county:*', function(json){
+                var jsonArr = [];
+                json.forEach(function(d,i) {
+                    jsonArr.push({
+                        GEOID: d[2] + d[3],
+                        population: d[1]
+                    })
+                });
+                delete jsonArr[0]
+                update_colors(jsonArr);
+            });
+        };
+
+        get_population(2009)
+
+        // debugger;
+        //
+        // function add_population(data){
+        //     debugger;
+        //
+        //     var population_extent = d3.extent(data, function(d) {
+        //         return d[1];
+        //     });
+        //
+        //     var population_scale = d3.scale.linear().domain(population_extent).range([0,1])
+        //
+        //     svg.selectAll('path')
+        //         .attr('fill', function(d) {
+        //             if(this.features.properties.NAME === 'Choctaw') {
+        //                 return 'red'
+        //             } else {return 'black'}
+        //         })
+        //
+        // };
+        //
+        // d3.json('http://api.census.gov/data/2009/acs5?get=NAME,B01001C_001E&for=county:*', add_population)
+    };
+    </script>
+</head>
+<body>
+    <script type="text/javascript">
+        d3.json('us_counties.json', draw);
+    </script>
+</body>
+</html>
