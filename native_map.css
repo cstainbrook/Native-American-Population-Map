@@ -1,0 +1,63 @@
+h1{
+    text-align: center;
+    font-size: 300%
+}
+h2{
+    text-align: center;
+}
+div.population_line{
+    position: fixed;
+    right:4%;
+    top: 18%;
+}
+div.years_buttons{
+    position: fixed;
+    top: 20%;
+    left: 1%;
+}
+div.years_buttons div{
+    background-color: BurlyWood;
+    opacity: .9;
+    border: 2px;
+    border-radius: 7px;
+    color: black;
+    padding: 5px;
+    margin: 15px;
+    font-weight: bold;
+}
+g.legend{
+    position: fixed;
+    top: 25%;
+    left: 14%;
+}
+.x_axis line{
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+    shape-rendering: auto;
+}
+.x_axis text{
+    font-family: sans-serif;
+    font-size: 12px;
+}
+.y_axis line{
+    fill: none;
+    stroke: black;
+    stroke-width: 1;
+    shape-rendering: auto;
+}
+.y_axis text{
+    font-family: sans-serif;
+    font-size: 12px;
+}
+#county_instruction{
+    opacity: .9;
+    position: fixed;
+    right:4%;
+    top: 30%;
+    background-color: BurlyWood;
+    border: 2px;
+    border-radius: 7px;
+    padding: 15px;
+    margin: 35px;
+}
