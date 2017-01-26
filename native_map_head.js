@@ -2,8 +2,8 @@ function draw(geo_data) {
     d3.select('h1')
         .text('Native American Population');
 
-    var width = 1000,
-        height = 500;
+    var width = 850,
+        height = 450;
 
     var svg = d3.select('.map_holder')
                 .append('svg')
@@ -13,8 +13,8 @@ function draw(geo_data) {
                 .attr('class', 'map');
 
     var projection = d3.geo.mercator()
-                           .scale(850)
-                           .translate([width * 1.93, height * 1.73]);
+                           .scale(750)
+                           .translate([width * 2.02, height * 1.7]);
 
     var path = d3.geo.path().projection(projection);
 
@@ -126,8 +126,8 @@ function draw(geo_data) {
     var ls_w = 20, ls_h = 20;
 
     legend.append("rect")
-            .attr("x", 820)
-            .attr("y", function(d, i){ return height - 50 - (i*ls_h) - 2*ls_h;})
+            .attr("x", 710)
+            .attr("y", function(d, i){ return height - 30 - (i*ls_h) - 2*ls_h;})
             .attr("width", ls_w)
             .attr("height", ls_h)
             .style("fill", 'maroon')
@@ -136,8 +136,8 @@ function draw(geo_data) {
             });
 
     legend.append("text")
-            .attr("x", 850)
-            .attr("y", function(d, i){ return height - 50 - (i*ls_h) - ls_h - 4;})
+            .attr("x", 740)
+            .attr("y", function(d, i){ return height - 30 - (i*ls_h) - ls_h - 4;})
             .text(function(d, i){ return legend_labels[i]; });
 
     function update_colors(pop_data, year) {
