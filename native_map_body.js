@@ -3,7 +3,7 @@ var population_min = 10000000000
 
 function update_min_max(year) {
     if (year === 1990) {
-        d3.json('http://api.census.gov/data/' + year + '/sf1?get=ANPSADPI,P0070003&for=county:*&key=YOUR_KEY_HERE', function(json){
+        d3.json('http://api.census.gov/data/' + year + '/sf1?get=ANPSADPI,P0070003&for=county:*&key=', function(json){
             json.splice(0,1)
             var min_max_extent = d3.extent(json, function(d) {
                 return +d[1];
@@ -12,7 +12,7 @@ function update_min_max(year) {
             if (min_max_extent[1] > population_max) { population_max = min_max_extent[1] };
         })
     } else if (year === 2000) {
-        d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,H011C001&for=county:*&key=YOUR_KEY_HERE', function(json){
+        d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,H011C001&for=county:*&key=', function(json){
             json.splice(0,1)
             var min_max_extent = d3.extent(json, function(d) {
                 return +d[1];
@@ -21,7 +21,7 @@ function update_min_max(year) {
             if (min_max_extent[1] > population_max) { population_max = min_max_extent[1] };
         })
     } else {
-        d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,B01001C_001E&for=county:*&key=YOUR_KEY_HERE', function(json){
+        d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,B01001C_001E&for=county:*&key=', function(json){
             json.splice(0,1)
             var min_max_extent = d3.extent(json, function(d) {
                 return +d[1];
