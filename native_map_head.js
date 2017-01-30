@@ -566,7 +566,7 @@ function draw(geo_data) {
 
     function get_population(year) {
         if (year === 1990) {
-            d3.json('http://api.census.gov/data/' + year + '/sf1?get=ANPSADPI,P0070003&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/sf1?get=ANPSADPI,P0070003&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var jsonArr = [];
                 json.forEach(function(d,i) {
                     jsonArr.push({
@@ -578,7 +578,7 @@ function draw(geo_data) {
                 update_colors(jsonArr, year);
             });
         } else if (year === 2000) {
-            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,H011C001&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,H011C001&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var jsonArr = [];
                 json.forEach(function(d,i) {
                     jsonArr.push({
@@ -590,7 +590,7 @@ function draw(geo_data) {
                 update_colors(jsonArr, year);
             });
         } else {
-            d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,B01001C_001E&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,B01001C_001E&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var jsonArr = [];
                 json.forEach(function(d,i) {
                     jsonArr.push({
@@ -617,7 +617,7 @@ function draw(geo_data) {
         };
 
         if (year === 1990) {
-            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,' + api_code + '&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,' + api_code + '&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var attributeArr = [];
                 json.forEach(function(d,i) {
                     attributeArr.push({
@@ -629,7 +629,7 @@ function draw(geo_data) {
                 merge_attribute(attributeArr, year, label)
             });
         } else if (year === 2000){
-            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,' + api_code + '&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/sf1?get=NAME,' + api_code + '&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var attributeArr = [];
                 json.forEach(function(d,i) {
                     attributeArr.push({
@@ -641,7 +641,7 @@ function draw(geo_data) {
                 merge_attribute(attributeArr, year, label)
             });
         } else{
-            d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,' + api_code + '&for=county:*&key=', function(json){
+            d3.json('http://api.census.gov/data/' + year + '/acs5?get=NAME,' + api_code + '&for=county:*&key=YOUR_KEY_HERE', function(json){
                 var attributeArr = [];
                 json.forEach(function(d,i) {
                     attributeArr.push({
