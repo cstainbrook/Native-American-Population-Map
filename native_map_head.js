@@ -40,7 +40,7 @@ function draw(geo_data) {
 
         x_domain = [x_domain[0]-1, x_domain[1]+1]
 
-        var x_scale = d3.scale.linear().range([0,400]).domain(x_domain)
+        var x_scale = d3.scale.linear().range([50,450]).domain(x_domain)
 
         y_domain = [0, 0]
 
@@ -62,7 +62,7 @@ function draw(geo_data) {
 
         var line_holder = d3.select('.population_line')
                             .append('svg')
-                            .attr('width', 350)
+                            .attr('width', 400)
                             .attr('height', 350)
                             .attr('id', 'line_svg')
 
@@ -110,13 +110,23 @@ function draw(geo_data) {
                     .style("text-anchor", "end")
                     .attr("dx", "-.8em")
                     .attr("dy", ".15em")
-                    .attr("transform", "rotate(-65)");
+                    .attr("transform", "rotate(-50)");
 
         line_holder.append('g')
                     .attr('class', 'y_axis')
-                    .attr('transform', 'translate(50, 0)')
+                    .attr('transform', 'translate(100, 0)')
                     .attr('stroke-width', 2)
                     .call(y_axis)
+
+        line_holder.append('text')
+                   .attr('text-anchor', 'middle')
+                   .attr('transform', 'translate(250, 350)')
+                   .text('Year')
+
+        line_holder.append('text')
+                   .attr('text-anchor', 'middle')
+                   .attr('transform', 'translate(50, 150)rotate(-90)')
+                   .text('# of People')
     };
 
     function plot_poverty(d, line_data, label) {
@@ -141,7 +151,7 @@ function draw(geo_data) {
 
         x_domain = [x_domain[0]-1, x_domain[1]+1]
 
-        var x_scale = d3.scale.linear().range([0,400]).domain(x_domain)
+        var x_scale = d3.scale.linear().range([50,450]).domain(x_domain)
 
         y_domain = [0, 0]
 
@@ -151,7 +161,7 @@ function draw(geo_data) {
         };
 
         y_domain = [y_domain[0]*1.1, y_domain[1]*1.1]
-        debugger;
+
         var y_scale = d3.scale.linear().range([300,0]).domain(y_domain)
 
         var color = d3.scale.ordinal()
@@ -163,7 +173,7 @@ function draw(geo_data) {
 
         var line_holder = d3.select('.population_line')
                             .append('svg')
-                            .attr('width', 350)
+                            .attr('width', 400)
                             .attr('height', 350)
                             .attr('id', 'line_svg')
 
@@ -211,13 +221,23 @@ function draw(geo_data) {
                     .style("text-anchor", "end")
                     .attr("dx", "-.8em")
                     .attr("dy", ".15em")
-                    .attr("transform", "rotate(-65)");
+                    .attr("transform", "rotate(-50)");
 
         line_holder.append('g')
                     .attr('class', 'y_axis')
-                    .attr('transform', 'translate(50, 0)')
+                    .attr('transform', 'translate(100, 0)')
                     .attr('stroke-width', 2)
                     .call(y_axis)
+
+        line_holder.append('text')
+                   .attr('text-anchor', 'middle')
+                   .attr('transform', 'translate(250, 350)')
+                   .text('Year')
+
+        line_holder.append('text')
+                   .attr('text-anchor', 'middle')
+                   .attr('transform', 'translate(40, 150)rotate(-90)')
+                   .text('# of People')
     };
 
     function update_line_plot(d, line_data, label) {
@@ -226,7 +246,7 @@ function draw(geo_data) {
         d3.select('#line_svg').remove()
         d3.select('#county_instruction').remove()
 
-        var x_scale = d3.scale.linear().range([0,400]).domain([d3.min(line_data, function(d){ return (d['x'] - 5) }), d3.max(line_data, function(d){ return (d['x'] + 5) })])
+        var x_scale = d3.scale.linear().range([50,450]).domain([d3.min(line_data, function(d){ return (d['x'] - 5) }), d3.max(line_data, function(d){ return (d['x'] + 5) })])
 
         var y_scale = d3.scale.linear().range([300,0]).domain([d3.min(line_data, function(d){ return (d['y'] - .1*d['y']) }), d3.max(line_data, function(d){ return (d['y'] + .1*d['y']) })])
 
@@ -236,7 +256,7 @@ function draw(geo_data) {
 
         var line_holder = d3.select('.population_line')
                             .append('svg')
-                            .attr('width', 350)
+                            .attr('width', 400)
                             .attr('height', 350)
                             .attr('id', 'line_svg')
 
@@ -289,13 +309,30 @@ function draw(geo_data) {
                     .style("text-anchor", "end")
                     .attr("dx", "-.8em")
                     .attr("dy", ".15em")
-                    .attr("transform", "rotate(-65)");
+                    .attr("transform", "rotate(-50)");
 
         line_holder.append('g')
                     .attr('class', 'y_axis')
-                    .attr('transform', 'translate(50, 0)')
+                    .attr('transform', 'translate(100, 0)')
                     .attr('stroke-width', 2)
                     .call(y_axis)
+
+        line_holder.append('text')
+                   .attr('text-anchor', 'middle')
+                   .attr('transform', 'translate(250, 350)')
+                   .text('Year')
+
+        if (label === 'Population'){
+            line_holder.append('text')
+                       .attr('text-anchor', 'middle')
+                       .attr('transform', 'translate(40, 150)rotate(-90)')
+                       .text('# of People')
+        } else if (label === 'Male Age' | label === 'Female Age'){
+            line_holder.append('text')
+                       .attr('text-anchor', 'middle')
+                       .attr('transform', 'translate(40, 150)rotate(-90)')
+                       .text('Median Age')
+        }
     };
 
     var map = svg.selectAll('path')
